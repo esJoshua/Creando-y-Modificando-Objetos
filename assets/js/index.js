@@ -118,7 +118,7 @@ class Paciente {
     this._rut = () => rut;
     this._diagnostico = () => diagnostico;
   }
-// Getters //
+  // Getters //
   get nombre() {
     return this._nombre();
   }
@@ -171,24 +171,26 @@ const pacientesLista = (listado) => {
 };
 //pacientesLista(pacientes);
 
-
 // Metodo addEventListener del input con metodos para filtrar las busquedas //
 busquedaPacienteId.addEventListener("input", (e) => {
   const search = e.target.value.toLowerCase().trim();
-  const resultadoPaciente = pacientes.filter((paciente) =>
-    paciente.nombre.toLocaleLowerCase().includes(search)
-  );
-  const resultadoConsultorio = pacientes.filter((paciente) =>
-    paciente.consultorio.toLocaleLowerCase().includes(search)
-  );
+  //console.log(search)
+  if (!search) console.log("Espacio en blanco");
+  else {
+    const resultadoConsultorio = pacientes.filter((paciente) =>
+      paciente.consultorio.toLocaleLowerCase().includes(search)
+    );
+    const resultadoPaciente = pacientes.filter((paciente) =>
+      paciente.nombre.toLocaleLowerCase().includes(search)
+    );
 
-  containerPacientesId.className = "";
-  btnMostrarId.innerHTML = "Ocultar resultados";
-  tablaPacientesId.innerHTML = "";
-  pacientesLista(resultadoConsultorio);
-  // tablaPacientesId.innerHTML = "";
-  pacientesLista(resultadoPaciente);
-  
+    containerPacientesId.className = "";
+    btnMostrarId.innerHTML = "Ocultar resultados";
+    tablaPacientesId.innerHTML = "";
+    pacientesLista(resultadoConsultorio);
+    // tablaPacientesId.innerHTML = "";
+    pacientesLista(resultadoPaciente);
+  }
 });
 // Metodo addEventListener del btn con evento click //
 btnMostrarId.addEventListener("click", () => {
